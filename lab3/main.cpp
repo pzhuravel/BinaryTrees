@@ -62,17 +62,41 @@ void Delete(Node **p, int data)
 			}
 	return;}
 
+int SumTree(Node *aNode){
+    if (aNode)
+        return SumTree(aNode->left)+aNode->value+SumTree(aNode->right);
+}
+
+int MaxTree(Node *aNode){
+    if (!(aNode->right)) return aNode->value;
+    else MaxTree(aNode->right);
+}
+
+void PrintLeaf(Node *aNode){
+    if (aNode){
+    PrintLeaf(aNode->left);
+    if ((!(aNode->left))&&(!(aNode->right)))
+    {
+     cout<<aNode->value<<endl;
+     return;
+    }
+    PrintLeaf(aNode->right);
+}
+return;
+}
 int main()
 {
-
     InsertNode(&root,5);
     InsertNode(&root,7);
     InsertNode(&root,3);
 
     PrintNode(root);
 
-    Delete(&root,3);
+ //   Delete(&root,3);
     cout<<endl;
     PrintNode(root);
+    cout<<endl<<"Tree sum is "<<SumTree(root)<<endl;
+    cout<<endl<<"Maximum of tree is "<<MaxTree(root)<<endl;
+    PrintLeaf(root);
     return 0;
 }
